@@ -471,6 +471,19 @@ bool DynamicsInterfaceKDL::verify_gravity(const Eigen::VectorXd & gravity)
   return true;
 }
 
+bool DynamicsInterfaceKDL::calculate_frame_difference(
+  Eigen::Matrix<double, 7, 1> & x_a, Eigen::Matrix<double, 7, 1> & x_b, double dt,
+  Eigen::Matrix<double, 6, 1> & delta_x)
+{
+  // TODO: implement this, for now, just return false
+  (void)x_a;
+  (void)x_b;
+  (void)dt;
+  (void)delta_x;
+  RCLCPP_ERROR(LOGGER, "calculate_frame_difference is not currently implemented.");
+  return false; 
+}
+
 }  // namespace dynamics_interface_kdl
 
 #include "pluginlib/class_list_macros.hpp"

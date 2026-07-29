@@ -81,6 +81,10 @@ public:
 
   bool calculate_gravity(const Eigen::VectorXd & joint_pos, Eigen::VectorXd & gravity) override;
 
+  bool calculate_frame_difference(
+    Eigen::Matrix<double, 7, 1> & x_a, Eigen::Matrix<double, 7, 1> & x_b, double dt,
+    Eigen::Matrix<double, 6, 1> & delta_x) override;
+
   bool convert_cartesian_deltas_to_joint_deltas(
     const Eigen::VectorXd & joint_pos, const Eigen::Matrix<double, 6, 1> & delta_x,
     const std::string & link_name, Eigen::VectorXd & delta_theta) override;

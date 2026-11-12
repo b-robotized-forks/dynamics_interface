@@ -30,9 +30,9 @@ target_include_directories(dynamics_interface_fd PUBLIC
   $<INSTALL_INTERFACE:include/dynamics_interface_fd>
 )
 target_compile_features(dynamics_interface_fd PUBLIC cxx_std_17)
-ament_target_dependencies(dynamics_interface_fd PUBLIC
-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
-)
+foreach(dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
+  target_link_libraries(dynamics_interface_fd PUBLIC ${${dependency}_TARGETS})
+endforeach()
 target_link_libraries(dynamics_interface_fd PUBLIC
   Eigen3::Eigen
 )
@@ -50,9 +50,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_dynamics_interface_fd dynamics_interface_fd)
 
-  # TODO: Use target_link_libraries once ros2_control_test_assets'
-  #       CMake include export is fixed
-  ament_target_dependencies(test_dynamics_interface_fd ros2_control_test_assets)
+  target_link_libraries(test_dynamics_interface_fd ${ros2_control_test_assets_TARGETS})
 endif()
 
 install(

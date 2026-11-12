@@ -28,9 +28,9 @@ target_include_directories(dynamics_interface PUBLIC
 target_link_libraries(dynamics_interface PUBLIC
   Eigen3::Eigen
 )
-ament_target_dependencies(dynamics_interface PUBLIC
-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
-)
+foreach(dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
+  target_link_libraries(dynamics_interface PUBLIC ${${dependency}_TARGETS})
+endforeach()
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
